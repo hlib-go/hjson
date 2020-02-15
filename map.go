@@ -4,16 +4,21 @@ import (
 	"encoding/json"
 )
 
-// Map -> Json
-func MapToJson(mapData interface{}) string {
-	bytes, err := json.Marshal(mapData)
+// Map -> bytes
+func MapToBytes(vmap interface{}) []byte {
+	bytes, err := json.Marshal(vmap)
 	if err != nil {
 		panic(err)
 	}
-	return string(bytes)
+	return bytes
+}
+
+// Map -> Json
+func MapToJson(vmap interface{}) string {
+	return string(MapToBytes(vmap))
 }
 
 // Map -> Struct
-func MapToStruct(mapData interface{}, v interface{}) {
-	JsonToStruct(MapToJson(mapData), v)
+func MapToStruct(vmap interface{}, v interface{}) {
+	JsonToStruct(MapToJson(vmap), v)
 }
